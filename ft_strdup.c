@@ -6,7 +6,7 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:54:39 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/10/24 15:59:48 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:01:57 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
-
-#include <stdio.h>
+/*#include <stdio.h>
 int	main(void)
 {
 	printf("%s\n", ft_strdup("Hi, 42!"));
 	return (0);
-}
+}*/

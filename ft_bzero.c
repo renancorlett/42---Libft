@@ -6,14 +6,13 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:02:48 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/10/21 16:23:17 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:00:01 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //function = Sets the first n bytes of the memory area pointed to by s to 0;
 //s = memory area;
 //n = number of bytes to be set to 0.
-
 
 #include "libft.h"
 
