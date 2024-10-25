@@ -6,95 +6,114 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:09:42 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/10/21 15:09:54 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/10/25 10:54:36 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//function = Allocates with malloc and returns an array of string obtained by
+//splitting 's' using a char 'c' as a delimiter. Must end with a NULL pointer;
+// s	= String to be splitted;
+// c	= Delimiter character;
+//if returns array of a new string from the split or NULL in the allocation=FAIL
+
 #include "libft.h"
 
-static int	word_count(char const *s, char c)
+static int	ft_wordcount(char const *s, char c)
 {
 	int	count;
-	int	in_word;
+	int	i;
 
 	count = 0;
-	in_word = 0;
-	while (*s)
+	i = 0;
+	while (s[i])
 	{
-		if (*s != c && !in_word)
+		while (s[i] == c)
+			i++;
+		if (s[i] != '\0')
 		{
-			in_word = 1;
 			count++;
+			while (s[i] != c && s[i])
+				i++;
 		}
-		else if (*s == c)
-			in_word = 0;
-		s++;
 	}
 	return (count);
 }
 
-static char	*word_dup(const char *s, int start, int end)
+static int	ft_wordlen(char const *s, char c, int start)
 {
-	char	*word;
-	int		i;
+	int	i;
+	int	count;
 
-	word = (char *)malloc(sizeof(char) * (end - start + 1));
-	if (!word)
-		return (NULL);
-	i = 0;
-	while (start < end)
-		word[i++] = s[start++];
-	word[i] = '\0';
-	return (word);
+	i = start;
+	count = 0;
+	while (s[i] && s[i] != c)
+	{
+		count++;
+		i++;
+	}
+	return (count);
 }
 
-static void	free_memory(char **result, int j)
+static char	*ft_getword(char const *s, char c, int start)
 {
-	while (j > 0)
-		free(result[--j]);
-	free(result);
+	char	*word;
+	int		len;
+	int		i;
+	int		j;
+
+	i = start;
+	j = 0;
+	len = ft_wordlen(s, c, start);
+	word = (char *)malloc(sizeof(char) * (len + 1));
+	if (!word)
+		return (NULL);
+	while (s[i] && s[i] != c)
+		word[j++] = s[i++];
+	word[j] = '\0';
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
 	int		i;
 	int		j;
-	int		start;
+	char	**arr;
 
-	result = (char **)malloc(sizeof(char *) * (word_count(s, c) + 1));
-	if (!s || !result)
-		return (NULL);
 	i = 0;
-	j = 0;
+	j = -1;
+	if (!s)
+		return (NULL);
+	arr = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
+	if (!arr)
+		return (NULL);
 	while (s[i])
 	{
-		if (s[i] != c)
-		{
-			start = i;
-			while (s[i] && s[i] != c)
-				i++;
-			result[j] = word_dup(s, start, i);
-			if (!result[j])
-				return (free_memory(result, j), NULL);
-			j++;
-		}
-		else
+		while (s[i] == c)
+			i++;
+		if (s[i] != '\0')
+			arr[++j] = ft_getword(s, c, i);
+		while (s[i] && s[i] != c)
 			i++;
 	}
-	result[j] = NULL;
-	return (result);
+	arr[++j] = NULL;
+	return (arr);
 }
 
-/*
-#include <stdio.h>
+/*#include <stdio.h>
 int main(void)
 {
-    char **result;
-    result = ft_split("Hello World 42", ' ');
-    printf("Word 1: %s\n", result[0]);
-    printf("Word 2: %s\n", result[1]);
-    printf("Word 3: %s\n", result[2]);
-    return (0);
-}
-*/
+	char **result = ft_split("renan=corlett", '=');
+	int	i;
+	
+	if (result)
+	{
+		while (result[i])
+		{
+			printf("Word %d: %s\n", i, result[i]);
+			free(result[i]);
+			i++;
+		}
+		free (result);
+	}
+	return (0);
+}*/
