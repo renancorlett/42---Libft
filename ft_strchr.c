@@ -19,21 +19,15 @@
 #include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
-
 {
-	int	i;
-
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (s[i])
-		i++;
-	while (i >= 0)
+	while (*s != '\0')
 	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i--;
+		if (*s == (unsigned char)c)
+			return ((char *)s);
+		s++;
 	}
+	if ((unsigned char)c == '\0')
+		return ((char *)s);
 	return (NULL);
 }
 

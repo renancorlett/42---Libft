@@ -6,7 +6,7 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:13:15 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/10/24 17:00:51 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/10/25 12:27:07 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_putendl_fd(char *s, int fd)
 	write (fd, "\n", 1);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	ft_putendl_fd("line", 1);
 	return (0);
-}
+}*/

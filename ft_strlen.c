@@ -6,7 +6,7 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:40:27 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/10/24 16:07:47 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/10/25 11:12:45 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	if (s == NULL)
-		return (0);
 	while (s[i])
 		i++;
 	return (i);
