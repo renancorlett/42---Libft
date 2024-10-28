@@ -6,7 +6,7 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:09:42 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/10/25 10:54:36 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/10/28 08:36:04 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	**ft_split(char const *s, char c)
 /*#include <stdio.h>
 int main(void)
 {
-	char **result = ft_split("renan=corlett", '=');
+	char **result = ft_split(Renan=Corlett", '=');
 	int	i;
 	
 	if (result)
