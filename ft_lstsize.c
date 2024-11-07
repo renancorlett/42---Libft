@@ -6,7 +6,7 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:19:02 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/11/07 12:20:42 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:45:27 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_lstsize(t_list *lst)
 	int	i;
 
 	i = 0;
-	while (lst)
+	while (lst != NULL)
 	{
 		i++;
 		lst = lst->next;
@@ -25,24 +25,16 @@ int	ft_lstsize(t_list *lst)
 	return (i);
 }
 
-/*
+/*#include <stdio.h>
 #include "ft_lstnew.c"
-#include <stdio.h>
-int main(void)
-{
-    t_list *node = ft_lstnew("1");
-    node->next = ft_lstnew("2");
-    node->next->next = ft_lstnew("3");
-    node->next->next->next = ft_lstnew("4");
-    node->next->next->next->next = ft_lstnew("5");
+#include "ft_lstadd_front.c"
 
-    int size = ft_lstsize(node);
-    printf("The size of the list is: %d\n", size);
-    while (node)
-	{
-        t_list *temp = node;
-        node = node->next;
-        free(temp);
-    }
-    return (0);
+int	main(void)
+{
+	t_list	*list = ft_lstnew("picanha");
+	ft_lstadd_front(&list, ft_lstnew("feijao"));
+	ft_lstadd_front(&list, ft_lstnew("arroz"));
+	ft_lstadd_front(&list, ft_lstnew("macarrao"));
+	printf("%d\n", ft_lstsize(list));
+	return (0);
 }*/

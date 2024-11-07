@@ -6,45 +6,35 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:59:04 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/11/07 12:18:26 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:47:45 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+//É responsável por criar um novo nó para uma lista encadeada. 
+//Aloca memória para o nó, inicializa o content com um valor 
+//passado como argumento e define o ponteiro next como NULL
+
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*n_node;
+	t_list	*str;
 
-	n_node = (t_list *)malloc(sizeof(t_list));
-	if (!n_node)
+	str = (t_list *)malloc(sizeof(t_list));
+	if (!str)
 		return (NULL);
-	n_node->content = content;
-	n_node->next = NULL;
-	return (n_node);
+	str->content = content;
+	str->next = NULL;
+	return (str);
 }
 
-/*
-#include <stdio.h>
-int	main(int ac, char **av)
-{
-	if (ac == 4)
-	{
-		t_list	*node1 = ft_lstnew((char *)av[1]);
-		t_list	*node2 = ft_lstnew((char *)av[2]);
-		t_list	*node3 = ft_lstnew((char *)av[3]);
+/*#include <stdio.h>
 
-		printf("Node1->content: %s, located at: %p\n\n", 
-		(char *)node1->content, (char *)node1->content);
-		printf("Node2->content: %s, located at: %p\n\n",
-		(char *)node2->content, (char *)node2->content);
-		printf("Node3->content: %s, located at: %p\n",
-		(char *)node3->content, (char *)node3->content);
-		free(node1);
-		free(node2);
-		free(node3);
-		return (0);
-	}
-	printf("Usage: 'av[1]' 'av[2]' 'av[3]'\n");
-	return (1);
+int	main(void)
+{
+	char	*str = "renan corlett";
+	t_list	*i = ft_lstnew((void *)str);
+	printf("%s\n", (char *)i->content);
+	free(i);
+	return (0);
 }*/

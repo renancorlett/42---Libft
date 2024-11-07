@@ -6,74 +6,62 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:27:01 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/11/07 11:32:23 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:00:00 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void))
-{
-	t_list	*temp;
+#include "libft.h"
 
-	if (!lst || !*lst)
+//Apaga toda a lista
+
+void	del(void *content)
+{
+	free(content);
+}
+
+void	ft_lstclear(t_list **lst, void (*del)(void*))
+{
+	t_list	*allnode;
+	t_list	*nextnode;
+
+	if (lst == NULL || *lst == NULL)
 		return ;
-	while (*lst)
+	allnode = *lst;
+	while (allnode != NULL)
 	{
-		temp = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = temp;
+		nextnode = allnode->next;
+		del(allnode->content);
+		free(allnode);
+		allnode = nextnode;
 	}
-	*lst = NULL;
+	*lst = nextnode;
 }
 
-/*
-static void	del(void *lst)
-{
-	free(lst);
-}
-
-#include "ft_lstsize.c"
+/*#include <stdio.h>
 #include "ft_lstnew.c"
-#include "ft_lstlast.c"
-#include "ft_lstadd_back.c"
 #include "ft_strdup.c"
-#include "ft_strlen.c"
-#include <stdio.h>
+#include "ft_lstadd_front.c"
 int	main(void)
 {
-	t_list *list = NULL;
-	t_list *node1 = malloc(sizeof(t_list));
-	t_list *node2 = malloc(sizeof(t_list));
-	t_list *node3 = malloc(sizeof(t_list));
-
-	node1->content = ft_strdup("hello!");
-	node1->next = node2;
-
-	node2->content = ft_strdup("world!");
-	node2->next = node3;
-
-	node3->content = ft_strdup("!");
-	node3->next = NULL;
-
-	list = node1;
-
-	ft_lstclear(&list, del);
-
-	if (list == NULL)
-		printf("List successfully cleared.\n");
-	else
+	t_list	*list = ft_lstnew(ft_strdup("tangerina"));
+	ft_lstadd_front(&list, ft_lstnew(ft_strdup("laranja")));
+	ft_lstadd_front(&list, ft_lstnew(ft_strdup("goiaba")));
+	ft_lstadd_front(&list, ft_lstnew(ft_strdup("uva")));
+	printf("\nAntes de retirar da lista:\n");
+	t_list *temp = list;
+	while (temp)
 	{
-		printf("List not cleared. Freeing remaining nodes...\n");
-		while (list)
-		{
-			t_list *temp = list;
-			list = list->next;
-			del(temp->content);
-			free(temp);
-		}
-		printf("Remaining nodes freed.\n");
+		printf("%s\n", (char *)temp->content);
+		temp = temp->next;
 	}
+	ft_lstclear(&list, del);
+	printf("\nLista depois da retirada:");
+	if (list == NULL)
+	{
+		printf("\nLista vazia!\n");
+	}
+	
 	return (0);
 }*/

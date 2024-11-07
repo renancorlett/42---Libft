@@ -6,7 +6,7 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:43:04 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/11/07 11:45:30 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:53:54 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,23 @@
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (lst == NULL)
-		return (0);
-	while (lst)
+		return (NULL);
+	while (lst->next != NULL)
 	{
-		if (lst->next == NULL)
-			return (lst);
 		lst = lst->next;
 	}
 	return (lst);
 }
 
-/*
+/*#include <stdio.h>
 #include "ft_lstnew.c"
-#include <stdio.h>
-int main(void)
+#include "ft_lstadd_front.c"
+int	main(void)
 {
-    t_list *node = ft_lstnew("1");
-    node->next = ft_lstnew("2");
-    node->next->next = ft_lstnew("3");
-    node->next->next->next = ft_lstnew("4");
-    node->next->next->next->next = ft_lstnew("5");
-
-    printf("The last node of the list is: %s\n",
-	(char*)ft_lstlast(node)->content);
-	printf("Located at (%p)\n", (void *)ft_lstlast(node));
-
-    while (node)
-    {
-        t_list *temp = node;
-        node = node->next;
-        free(temp);
-    }
-    
-    return (0);
+	t_list	*list = ft_lstnew("picanha");
+	ft_lstadd_front(&list, ft_lstnew("feijao"));
+	ft_lstadd_front(&list, ft_lstnew("arroz"));
+	ft_lstadd_front(&list, ft_lstnew("macarrao"));
+	printf("%s\n",(char *) list->content);
+	return (0);
 }*/

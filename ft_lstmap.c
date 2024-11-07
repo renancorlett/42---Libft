@@ -5,134 +5,84 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 11:45:54 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/11/07 11:58:28 by rcorlett         ###   ########.fr       */
+/*   Created: 2024/11/07 15:29:48 by rcorlett          #+#    #+#             */
+/*   Updated: 2024/11/07 15:51:45 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static t_list	*ft_newl(t_list *list, void *(*f)(void *), void (*del)(void *))
-{
-	t_list	*new_lst;
-	void	*content;
+//O objetivo dela é aplicar uma função a cada elemento de uma lista encadeada, 
+//criando uma nova lista com os resultados. E excluindo se necessario.
 
-	if (!lst || !f || !del)
-		return (NULL);
-	content = f(list->content);
-	new_lst = ft_lstnew(content);
-	if (!new_lst)
-	{
-		del(content);
-		return (NULL);
-	}
-	return (new_lst);
+/*void	del_node(void *content)
+{
+	free(content);
 }
+
+void	*ft_strtemp(void *s)
+{
+	char *c;
+	
+	c = (char *)s;
+	while (*c) 
+	{
+		if (*c >= 'a' && *c <= 'z')
+				*c -= 32;
+		c++; 
+	}
+	return (s);
+}*/
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_lst;
-	t_list	*head;
+	t_list	*new_list;
+	t_list	*new_node;
 
-	new_lst = ft_newl(lst, f, del);
-	if (!new_lst)
+	if (!lst || !f)
 		return (NULL);
-	head = new_lst;
-	lst = lst->next;
+	new_list = NULL;
 	while (lst)
 	{
-		new_lst->next = ft_lstnew(f(lst->content));
-		if (!new_lst->next)
+		new_node = ft_lstnew(f(lst->content));
+		if (!new_node)
 		{
-			ft_lstclear(&head, del);
+			ft_lstclear(&new_list, del);
 			return (NULL);
 		}
-		new_lst = new_lst->next;
+		ft_lstadd_back(&new_list, new_node);
 		lst = lst->next;
 	}
-	new_lst->next = NULL;
-	return (head);
+	return (new_list);
 }
 
-/*
-#include "ft_strdup.c"
-#include "ft_lstnew.c"
-#include "ft_strlen.c"
+/*#include <stdio.h>
 #include "ft_lstclear.c"
-#include <stdio.h>
+#include "ft_strdup.c"
+#include "ft_lstadd_back.c"
+#include "ft_lstnew.c"
+#include "ft_lstadd_front.c"
 
-void *to_uppercase(void *content);
-void del_content(void *content);
-
-int main(int ac, char **av)
+int	main(void)
 {
-	if (ac == 5)
-    {
-		t_list *node1 = ft_lstnew(ft_strdup(av[1]));
-    	t_list *node2 = ft_lstnew(ft_strdup(av[2]));
-    	t_list *node3 = ft_lstnew(ft_strdup(av[3]));
-    	t_list *node4 = ft_lstnew(ft_strdup(av[4]));
-
-    	node1->next = node2;
-    	node2->next = node3;
-    	node3->next = node4;
-
-    	t_list *new_list = ft_lstmap(node1, to_uppercase, del_content);
-
-    	t_list *temp = new_list;
-    	while (temp)
-    	{
-        	printf("%s\n", (char *)temp->content);
-        	temp = temp->next;
-    	}
-
-    	temp = new_list;
-    	while (temp)
-    	{
-        	t_list *next = temp->next;
-        	free(temp->content);
-        	free(temp);
-        	temp = next;
-    	}
-
-    	temp = node1;
-    	while (temp)
-    	{
-        	t_list *next = temp->next;
-        	free(temp->content);
-        	free(temp);
-        	temp = next;
-    	}
-		return (0);
-	}
-	else if (ac > 5)
+	t_list	*list = ft_lstnew(ft_strdup("picanha"));
+	ft_lstadd_front(&list, ft_lstnew(ft_strdup("feijao")));
+	ft_lstadd_front(&list, ft_lstnew(ft_strdup("arroz")));
+	ft_lstadd_front(&list, ft_lstnew(ft_strdup("macarrao")));
+	printf("\nLista antes:\n");
+	t_list *temp = list;
+	while (temp)
 	{
-		printf("Too many arguments!\n");
-		return (2);
+		printf("%s\n", (char *)temp->content);
+		temp = temp->next;
 	}
-	else
-		printf("Missing command-line argument!\n");
-	return (1);
-}
-
-void *to_uppercase(void *content)
-{
-    char *str = (char *)content;
-    char *new_str = ft_strdup(str);
-    if (!new_str)
-        return NULL;
-
-    for (int i = 0; new_str[i]; i++)
-    {
-        if (new_str[i] >= 'a' && new_str[i] <= 'z')
-        {
-            new_str[i] = new_str[i] - ('a' - 'A');
-        }
-    }
-    return new_str;
-}
-
-void del_content(void *content)
-{
-    free(content);
+	t_list	*new_list = ft_lstmap(list, ft_strtemp, del_node);
+	printf("\nLista nova:\n");
+	temp = new_list;
+	while (temp)
+	{
+		printf("%s\n", (char *) temp->content);
+		temp = temp->next;
+	}
+	return (0);
 }*/

@@ -6,59 +6,63 @@
 /*   By: rcorlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:38:26 by rcorlett          #+#    #+#             */
-/*   Updated: 2024/11/07 11:42:31 by rcorlett         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:56:40 by rcorlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*void	ft_strtemp(void *s)
+{
+	char *c;
+	
+	c = (char *)s;
+	while (*c) 
+	{
+		if (*c >= 'a' && *c <= 'z')
+				*c -= 32;
+		c++; 
+	}
+}
+*/
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (!lst || !f)
+	t_list	*temp;
+
+	temp = lst;
+	if (lst == NULL)
 		return ;
-	while (lst)
+	while (temp)
 	{
-		f(lst->content);
-		lst = lst->next;
+		f(temp->content);
+		temp = temp->next;
 	}
 }
-
-/*#include "ft_lstnew.c"
+/*
 #include <stdio.h>
-
-static void print_node(void *content);
-
+#include "ft_lstnew.c"
+#include "ft_lstadd_front.c"
+#include "ft_strdup.c"
 int	main(void)
 {
-	t_list	*node1 = ft_lstnew("Hello");
-	t_list	*node2 = ft_lstnew("World!");
-	t_list	*node3 = ft_lstnew("Bye");
-	t_list	*node4 = ft_lstnew("World!");
-
-	if (!node1 || !node2 || !node3 || !node4)
+	t_list	*list = ft_lstnew(ft_strdup("banana"));
+	ft_lstadd_front(&list, ft_lstnew(ft_strdup("pera")));
+	ft_lstadd_front(&list, ft_lstnew(ft_strdup("melao")));
+	ft_lstadd_front(&list, ft_lstnew(ft_strdup("manga")));
+	printf("\nLista antes:\n");
+	t_list *temp = list;
+	while (temp)
 	{
-		printf("Memory allocation fail!\n");
-		free(node1);
-		free(node2);
-		free(node3);
-		free(node4);
-		return (1);
+		printf("%s\n", (char *)temp->content);
+		temp = temp->next;
 	}
-
-	node1->next = node2;
-	node2->next = node3;
-	node3->next = node4;
-
-	ft_lstiter(node1, print_node);
-
-	free(node1);
-	free(node2);
-	free(node3);
-	free(node4);
+	t_list	*lst = list;
+	ft_lstiter(lst, ft_strtemp);
+	printf("\nLista depois com a adição da função:\n");
+	while (lst)
+	{
+		printf("%s\n", (char *) lst->content);
+		lst = lst->next;
+	}
 	return (0);
-}
-
-static void print_node(void *content)
-{
-    printf("%s\n", (char *)content);
 }*/
